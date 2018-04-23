@@ -1,5 +1,11 @@
 module IkngttyRubyLib
   module EnumerableRefinements
+    refine Enumerable do
+      def empty?
+        self.first(1).length == 0
+      end
+    end
+
     refine Array do
       # A nondestructive "delete" method.
       def remove(val, &block)

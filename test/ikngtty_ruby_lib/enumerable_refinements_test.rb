@@ -5,7 +5,37 @@ module IkngttyRubyLibTest
   class EnumerableRefinementsTest < Test::Unit::TestCase
     using IkngttyRubyLib::EnumerableRefinements
 
-    def test_remove_without_block
+    def test_enumerable_empty?
+      # Not empty.
+      lambda do
+        enum = [1, 2, 4].lazy.select(&:odd?)
+        assert_equal(Enumerator::Lazy, enum.class)
+        assert_equal(1, enum.count)
+
+        assert_equal(false, enum.empty?)
+      end.call
+
+      # Empty.
+      lambda do
+        enum = [0, 2, 4].lazy.select(&:odd?)
+        assert_equal(Enumerator::Lazy, enum.class)
+        assert_equal(0, enum.count)
+
+        assert_equal(true, enum.empty?)
+      end.call
+
+      # Not empty but a member is nil.
+      lambda do
+        enum = [nil].lazy.select(&:nil?)
+        assert_equal(Enumerator::Lazy, enum.class)
+        assert_equal(1, enum.count)
+        assert_equal(nil, enum.first)
+
+        assert_equal(false, enum.empty?)
+      end.call
+    end
+
+    def test_array_remove_without_block
       src = [10, 20, 30, 40]
 
       dist = src.remove(20)
@@ -13,7 +43,7 @@ module IkngttyRubyLibTest
       assert_equal([10, 30, 40], dist)
     end
 
-    def test_remove_with_block
+    def test_array_remove_with_block
       src = [10, 20, 30, 40]
       sub_effects_executed = Array.new(2, false)
 
@@ -28,7 +58,7 @@ module IkngttyRubyLibTest
       assert_equal(false, sub_effects_executed[1])
     end
 
-    def test_remove_at
+    def test_array_remove_at
       src = [10, 20, 30, 40]
 
       dist = src.remove_at(2)
@@ -38,10 +68,16 @@ module IkngttyRubyLibTest
   end
 
   class EnumerableRefinementsTestWithoutUsing < Test::Unit::TestCase
-    def test_remove
+    def test_enumerable_empty?
+      enum = [1, 2, 3].lazy
+      assert_equal(Enumerator::Lazy, enum.class)
+
+      assert_raise(NoMethodError) { enum.empty? }
+    end
+    def test_array_remove
       assert_raise(NoMethodError) { [].remove(0) }
     end
-    def test_remove_at
+    def test_array_remove_at
       assert_raise(NoMethodError) { [].remove_at(0) }
     end
   end
