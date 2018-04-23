@@ -1,9 +1,9 @@
 require 'test/unit'
-require_relative '../../src/ikngtty_ruby_lib/array_refinements'
+require_relative '../../src/ikngtty_ruby_lib/enumerable_refinements'
 
 module IkngttyRubyLibTest
-  class ArrayRefinementsTest < Test::Unit::TestCase
-    using IkngttyRubyLib::ArrayRefinements
+  class EnumerableRefinementsTest < Test::Unit::TestCase
+    using IkngttyRubyLib::EnumerableRefinements
 
     def test_remove_without_block
       src = [10, 20, 30, 40]
@@ -37,7 +37,7 @@ module IkngttyRubyLibTest
     end
   end
 
-  class ArrayRefinementsTestWithoutUsing < Test::Unit::TestCase
+  class EnumerableRefinementsTestWithoutUsing < Test::Unit::TestCase
     def test_remove
       assert_raise(NoMethodError) { [].remove(0) }
     end

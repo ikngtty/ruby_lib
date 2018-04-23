@@ -1,5 +1,5 @@
 module IkngttyRubyLib
-  module ArrayRefinements
+  module EnumerableRefinements
     refine Array do
       # A nondestructive "delete" method.
       def remove(val, &block)
