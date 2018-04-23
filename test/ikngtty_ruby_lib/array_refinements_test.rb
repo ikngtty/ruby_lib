@@ -35,25 +35,6 @@ module IkngttyRubyLibTest
       assert_equal([10, 20, 30, 40], src)
       assert_equal([10, 20, 40], dist)
     end
-
-    def test_remove_if_with_block
-      src = [10, 20, 30, 40]
-
-      dist = src.remove_if { |x| x % 20 == 0 }
-      assert_equal([10, 20, 30, 40], src)
-      assert_equal([10, 30], dist)
-    end
-
-    def test_remove_if_without_block
-      src = [10, 20, 30, 40]
-
-      enumerator = src.remove_if
-      assert_equal(enumerator.class, Enumerator)
-
-      dist = enumerator.each { |x| x % 20 == 10 }
-      assert_equal([10, 20, 30, 40], src)
-      assert_equal([20, 40], dist)
-    end
   end
 
   class ArrayRefinementsTestWithoutUsing < Test::Unit::TestCase
@@ -62,9 +43,6 @@ module IkngttyRubyLibTest
     end
     def test_remove_at
       assert_raise(NoMethodError) { [].remove_at(0) }
-    end
-    def test_remove_if
-      assert_raise(NoMethodError) { [].remove_if { |x| true } }
     end
   end
 end

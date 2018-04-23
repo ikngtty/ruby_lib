@@ -14,12 +14,6 @@ module IkngttyRubyLib
         dup.delete_at(pos)
         dup
       end
-
-      # A nondestructive "delete_if" method.
-      def remove_if(&block)
-        dup = self.dup
-        dup.delete_if(&block)
-      end
     end
   end
 end
