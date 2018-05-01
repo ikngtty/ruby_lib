@@ -69,16 +69,13 @@ module IkngttyRubyLibTest
 
   class EnumerableRefinementsTestWithoutUsing < Test::Unit::TestCase
     def test_enumerable_empty?
-      enum = [1, 2, 3].lazy
-      assert_equal(Enumerator::Lazy, enum.class)
-
-      assert_raise(NoMethodError) { enum.empty? }
+      assert_equal(false, Enumerable.method_defined?(:empty?))
     end
     def test_array_remove
-      assert_raise(NoMethodError) { [].remove(0) }
+      assert_equal(false, Array.method_defined?(:remove))
     end
     def test_array_remove_at
-      assert_raise(NoMethodError) { [].remove_at(0) }
+      assert_equal(false, Array.method_defined?(:remove_at))
     end
   end
 end
