@@ -45,17 +45,26 @@ module IkngttyRubyLibTest
 
     def test_array_remove_with_block
       src = [10, 20, 30, 40]
-      sub_effects_executed = Array.new(2, false)
 
-      dist_no_remove = src.remove(25) { sub_effects_executed[0] = true }
-      assert_equal([10, 20, 30, 40], src)
-      assert_equal([10, 20, 30, 40], dist_no_remove)
-      assert_equal(true, sub_effects_executed[0])
+      # Remove nohing
+      lambda do
+        block_called = false
 
-      dist_remove = src.remove(20) { sub_effects_executed[1] = true }
-      assert_equal([10, 20, 30, 40], src)
-      assert_equal([10, 30, 40], dist_remove)
-      assert_equal(false, sub_effects_executed[1])
+        dist = src.remove(25) { block_called = true }
+        assert_equal([10, 20, 30, 40], src)
+        assert_equal([10, 20, 30, 40], dist)
+        assert_equal(true, block_called)
+      end.call
+
+      # Remove something
+      lambda do
+        block_called = false
+
+        dist = src.remove(20) { block_called = true }
+        assert_equal([10, 20, 30, 40], src)
+        assert_equal([10, 30, 40], dist)
+        assert_equal(false, block_called)
+      end.call
     end
 
     def test_array_remove_at
