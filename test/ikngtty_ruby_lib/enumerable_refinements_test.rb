@@ -11,7 +11,7 @@ module IkngttyRubyLibTest
     def test_enumerable_empty?
       # Not empty.
       lambda do
-        enumerator = [1, 2, 4].lazy.select(&:odd?)
+        enumerator = [1, 2, 4].lazy.find_all(&:odd?)
         assert_equal(Enumerator::Lazy, enumerator.class)
         assert_equal(1, enumerator.count)
 
@@ -20,7 +20,7 @@ module IkngttyRubyLibTest
 
       # Empty.
       lambda do
-        enumerator = [0, 2, 4].lazy.select(&:odd?)
+        enumerator = [0, 2, 4].lazy.find_all(&:odd?)
         assert_equal(Enumerator::Lazy, enumerator.class)
         assert_equal(0, enumerator.count)
 
@@ -29,7 +29,7 @@ module IkngttyRubyLibTest
 
       # Not empty but a member is nil.
       lambda do
-        enumerator = [nil].lazy.select(&:nil?)
+        enumerator = [nil].lazy.find_all(&:nil?)
         assert_equal(Enumerator::Lazy, enumerator.class)
         assert_equal(1, enumerator.count)
         assert_equal(nil, enumerator.first)
@@ -110,7 +110,7 @@ module IkngttyRubyLibTest
         assert_instance_of(Enumerator::Lazy, will_take)
         assert_equal([], sub_effects)
 
-        took = will_take.select do |e|
+        took = will_take.find_all do |e|
           sub_effects << 'second'
           e % 20 == 10
         end.force
@@ -139,7 +139,7 @@ module IkngttyRubyLibTest
       assert_instance_of(Enumerator::Lazy, will_take)
       assert_equal([], sub_effects)
 
-      took = will_take.select do |e|
+      took = will_take.find_all do |e|
         sub_effects << 'second'
         e % 20 == 10
       end.force
