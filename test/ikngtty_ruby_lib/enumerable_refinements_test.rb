@@ -8,30 +8,30 @@ module IkngttyRubyLibTest
     def test_enumerable_empty?
       # Not empty.
       lambda do
-        enum = [1, 2, 4].lazy.select(&:odd?)
-        assert_equal(Enumerator::Lazy, enum.class)
-        assert_equal(1, enum.count)
+        enumerator = [1, 2, 4].lazy.select(&:odd?)
+        assert_equal(Enumerator::Lazy, enumerator.class)
+        assert_equal(1, enumerator.count)
 
-        assert_equal(false, enum.empty?)
+        assert_equal(false, enumerator.empty?)
       end.call
 
       # Empty.
       lambda do
-        enum = [0, 2, 4].lazy.select(&:odd?)
-        assert_equal(Enumerator::Lazy, enum.class)
-        assert_equal(0, enum.count)
+        enumerator = [0, 2, 4].lazy.select(&:odd?)
+        assert_equal(Enumerator::Lazy, enumerator.class)
+        assert_equal(0, enumerator.count)
 
-        assert_equal(true, enum.empty?)
+        assert_equal(true, enumerator.empty?)
       end.call
 
       # Not empty but a member is nil.
       lambda do
-        enum = [nil].lazy.select(&:nil?)
-        assert_equal(Enumerator::Lazy, enum.class)
-        assert_equal(1, enum.count)
-        assert_equal(nil, enum.first)
+        enumerator = [nil].lazy.select(&:nil?)
+        assert_equal(Enumerator::Lazy, enumerator.class)
+        assert_equal(1, enumerator.count)
+        assert_equal(nil, enumerator.first)
 
-        assert_equal(false, enum.empty?)
+        assert_equal(false, enumerator.empty?)
       end.call
     end
 
