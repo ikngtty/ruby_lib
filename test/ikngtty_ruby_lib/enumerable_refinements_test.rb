@@ -1,5 +1,8 @@
 require 'test/unit'
+require_relative '../../src/ikngtty_ruby_lib/assertions_refinements'
 require_relative '../../src/ikngtty_ruby_lib/enumerable_refinements'
+
+using IkngttyRubyLib::AssersionsRefinements
 
 module IkngttyRubyLibTest
   class EnumerableRefinementsTest < Test::Unit::TestCase
@@ -12,7 +15,7 @@ module IkngttyRubyLibTest
         assert_equal(Enumerator::Lazy, enumerator.class)
         assert_equal(1, enumerator.count)
 
-        assert((not enumerator.empty?))
+        assert_not(enumerator.empty?)
       end.call
 
       # Empty.
@@ -31,7 +34,7 @@ module IkngttyRubyLibTest
         assert_equal(1, enumerator.count)
         assert_equal(nil, enumerator.first)
 
-        assert((not enumerator.empty?))
+        assert_not(enumerator.empty?)
       end.call
     end
 
@@ -63,7 +66,7 @@ module IkngttyRubyLibTest
         dist = src.remove(20) { block_called = true }
         assert_equal([10, 20, 30, 40], src)
         assert_equal([10, 30, 40], dist)
-        assert((not block_called))
+        assert_not(block_called)
       end.call
     end
 
@@ -78,13 +81,13 @@ module IkngttyRubyLibTest
 
   class EnumerableRefinementsTestWithoutUsing < Test::Unit::TestCase
     def test_enumerable_empty?
-      assert((not Enumerable.method_defined?(:empty?)))
+      assert_not(Enumerable.method_defined?(:empty?))
     end
     def test_array_remove
-      assert((not Array.method_defined?(:remove)))
+      assert_not(Array.method_defined?(:remove))
     end
     def test_array_remove_at
-      assert((not Array.method_defined?(:remove_at)))
+      assert_not(Array.method_defined?(:remove_at))
     end
   end
 end
