@@ -2,7 +2,7 @@ require 'test/unit'
 require_relative '../../src/ikngtty_ruby_lib/assertions_refinements'
 require_relative '../../src/ikngtty_ruby_lib/enumerable_refinements'
 
-using IkngttyRubyLib::AssersionsRefinements
+using IkngttyRubyLib::AssertionsRefinements
 
 module IkngttyRubyLibTest
   class EnumerableRefinementsTest < Test::Unit::TestCase
