@@ -1,3 +1,5 @@
+require 'test/unit'
+
 module IkngttyRubyLib
   module AssertionsRefinements
     refine Test::Unit::Assertions do
