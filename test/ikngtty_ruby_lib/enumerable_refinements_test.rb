@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test/unit'
 require_relative '../../src/ikngtty_ruby_lib/assertions_refinements'
 require_relative '../../src/ikngtty_ruby_lib/enumerable_refinements'
@@ -69,7 +71,7 @@ module IkngttyRubyLibTest
       will_take = [10, 20, 30, 40, 50].take_break_if
       assert_instance_of(Enumerator, will_take)
 
-      took = will_take.with_index { |e, i| i >= 2 }
+      took = will_take.with_index { |_e, i| i >= 2 }
       assert_equal([10, 20, 30], took)
     end
 
@@ -116,13 +118,13 @@ module IkngttyRubyLibTest
         end.force
         assert_equal([10, 30], took)
         assert_equal(%w[
-          second
-          first
-          second
-          first
-          second
-          first
-        ], sub_effects)
+                       second
+                       first
+                       second
+                       first
+                       second
+                       first
+                     ], sub_effects)
       end
     end
 
@@ -132,7 +134,7 @@ module IkngttyRubyLibTest
       will_will_take = [10, 20, 30, 40, 50].lazy.take_break_if
       assert_instance_of(Enumerator::Lazy, will_will_take)
 
-      will_take = will_will_take.with_index do |e, i|
+      will_take = will_will_take.with_index do |_e, i|
         sub_effects << 'first'
         i >= 2
       end
@@ -145,13 +147,13 @@ module IkngttyRubyLibTest
       end.force
       assert_equal([10, 30], took)
       assert_equal(%w[
-        second
-        first
-        second
-        first
-        second
-        first
-      ], sub_effects)
+                     second
+                     first
+                     second
+                     first
+                     second
+                     first
+                   ], sub_effects)
     end
 
     def test_array_remove_without_block
@@ -199,15 +201,19 @@ module IkngttyRubyLibTest
     def test_enumerable_empty?
       assert_not(Enumerable.method_defined?(:empty?))
     end
+
     def test_enumerable_take_break_if
       assert_not(Enumerable.method_defined?(:take_break_if))
     end
+
     def test_enumerator_lazy_take_break_if
       assert_not(Enumerator::Lazy.method_defined?(:take_break_if))
     end
+
     def test_array_remove
       assert_not(Array.method_defined?(:remove))
     end
+
     def test_array_remove_at
       assert_not(Array.method_defined?(:remove_at))
     end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module IkngttyRubyLib
   module RegexpRefinements
     refine Regexp do
@@ -13,7 +15,7 @@ module IkngttyRubyLib
 
       # Return all match data.
       def matches(str)
-        self.each_match(str).to_a
+        each_match(str).to_a
       end
     end
   end

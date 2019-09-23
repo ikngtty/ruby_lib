@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 module IkngttyRubyLib
   module EnumerableRefinements
     refine Enumerable do
       def empty?
-        self.first(1).length == 0
+        first(1).empty?
       end
 
       # Similar to reversed "take_while", so to say "take_unless",
@@ -10,7 +12,7 @@ module IkngttyRubyLib
       def take_break_if(&block)
         Enumerator.new do |y|
           took = []
-          self.each do |element|
+          each do |element|
             took << element
             break if y.yield(element)
           end
@@ -23,7 +25,7 @@ module IkngttyRubyLib
       def take_break_if(&block)
         Enumerator.new do |y_for_break|
           Enumerator.new do |y_for_take|
-            self.each do |element|
+            each do |element|
               y_for_take << element
               break if y_for_break.yield(element)
             end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test/unit'
 require_relative '../../src/ikngtty_ruby_lib/seq_range'
 require_relative '../../src/ikngtty_ruby_lib/assertions_refinements'

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test/unit'
 require_relative '../../src/ikngtty_ruby_lib/assertions_refinements'
 require_relative '../../src/ikngtty_ruby_lib/regexp_refinements'
@@ -34,8 +36,8 @@ module IkngttyRubyLibTest
 
     def test_each_match_without_block
       matched = /(\d+)a/.each_match('1abc 12abc 123abc')
-                .map { |match| match[1].to_i }
-                .to_a
+                        .map { |match| match[1].to_i }
+                        .to_a
       assert_equal([1, 12, 123], matched)
     end
 
@@ -63,6 +65,7 @@ module IkngttyRubyLibTest
     def test_each_match
       assert_not(Regexp.method_defined?(:each_match))
     end
+
     def test_matches
       assert_not(Regexp.method_defined?(:matches))
     end

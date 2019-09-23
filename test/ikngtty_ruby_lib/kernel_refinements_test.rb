@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test/unit'
 require_relative '../../src/ikngtty_ruby_lib/assertions_refinements'
 require_relative '../../src/ikngtty_ruby_lib/kernel_refinements'
@@ -11,30 +13,30 @@ module IkngttyRubyLibTest
     def test_def_order_normal
       a = []
       def_order(
-        setup: -> do
+        setup: lambda do
           a.push('setup')
         end,
-        teardown: -> do
+        teardown: lambda do
           a.push('teardown')
         end,
-        main: -> do
+        main: lambda do
           a.push('main')
         end
       )
-      assert_equal(['setup', 'main', 'teardown'], a)
+      assert_equal(%w[setup main teardown], a)
     end
 
     def test_def_order_invalid_parameters
       assert_raise(ArgumentError) do
         a = []
         def_order(
-          setdown: -> do
+          setdown: lambda do
             a.add(1)
           end,
-          tearup: -> do
+          tearup: lambda do
             a.add(3)
           end,
-          mein: -> do
+          mein: lambda do
             a.add(2)
           end
         )
