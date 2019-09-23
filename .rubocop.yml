@@ -1,0 +1,4 @@
+require:
+  - rubocop-performance
+  - rubocop/require_tools
+  - rubocop-thread_safety
